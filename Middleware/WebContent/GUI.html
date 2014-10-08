@@ -1,0 +1,93 @@
+<!--   http://www.w3schools.com/tags/att_option_selected.asp
+http://www.dcc.fc.up.pt/~zp/aulas/0607/es/geral/bibliografia/O%27Reilly%20-%20JavaServer%20Pages_2nd%20Edition.pdf Seite 92
+http://www.se.uni-hannover.de/pages/de:tutorials_helloworld_jsp
+http://www.torsten-horn.de/techdocs/jee-tomcat-eclipse.htm#JSP
+http://www.torsten-horn.de/techdocs/jsp-grundlagen.htm
+
+http://www.jsp-develop.de/knowledgebase/view/271/
+http://de.selfhtml.org/dhtml/modelle/dom.htm
+http://de.selfhtml.org/javascript/objekte/options.htm
+http://www.javascriptkit.com/jsref/select.shtml
+
+
+http://www.java-forum.org/web-tier/136754-string-array-javascript.html
+-->
+
+<!DOCTYPE html>
+
+
+<html >
+ 
+
+<head>
+ <script type="text/Javascript" src="j-query-1.9.1.js" ></script>
+ <script type="text/Javascript" src="stomp.js" ></script>
+<script type="text/Javascript" src="library.js" ></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body onload="start(),getController(),setData()">
+
+<!--http://www.w3schools.com/tags/att_table_cellspacing.asp
+
+http://wiki.selfhtml.org/wiki/HTML/Tabellen/Zellen_verbinden-->
+<table cellspacing="15">
+<tr>
+<td colspan="2">
+ <h1 align="left" >Controller</h1> 
+</td>
+</tr>
+<tr>
+<td>
+<form>
+<input align="middle" type="submit" id="init" name="init" value="initialisieren" onclick="setController(),controllerInit()"/> 
+</form>
+</td>
+<td>
+<form>
+<input align="middle" type="submit"id="searchMethod" value="searchMethods" onclick="searchMethods()"/> 
+</form>
+</td>
+</tr>
+</table>
+
+<div id="User">
+
+<table id="table" cellspacing="15" align="middle" style="font-family:'Arial'">
+<tr>
+<td style="width:150px"> Eingabegeraet</td>
+<td style="width:150px"> </td>
+<td style="width:150px"></td>
+<td style="width:40px"></td>
+<td style="width:150px"> Ausgabesoftware</td>
+<td style="width:150px"> </td>
+<td style="width:150px"></td>
+<td style="width:150px"></td>
+<td style="width:60px"> </td>
+</tr>
+<tr>
+<td> Klasse</td>
+<td> Methode</td>
+<td>Name</td>
+<td></td>
+<td> Klasse</td>
+<td> Methode</td>
+<td>Topic</td>
+<td>Data</td>
+<td></td>
+<td> 
+	 <input type="submit" name="newRow" id="newRow" value="+" onclick="addNewRow(1)"/> 
+	
+	</td>
+	<td><form>
+	<input type="submit" name="submit" id="ok" value="OK" onclick="setController(),start()"  /> 
+	</form>
+	</td>
+</tr>
+</table>
+</div>
+
+</script>
+</body>
+</html>

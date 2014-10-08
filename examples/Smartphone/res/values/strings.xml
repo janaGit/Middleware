@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Smartphone</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="rechtKlick">rechts</string>
+    <string name="linksKlick">links</string>
+    <string name="obenKlick">hoch</string>
+    <string name="untenKlick">runter</string>
+    <string name="okKlick">OK</string>
+    <string name="local">192.168.178.22</string>
+    <string name="localWLan">192.168.137.1</string>
+     <string name="anmelden">anmelden</string>
+</resources>
