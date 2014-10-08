@@ -122,7 +122,7 @@ if(type.equals("getClasses2")){
 		}	
 	if(request.getParameter("type").equals("start")){
 		Controller.start();
-		}
-	}
+        }
+    }
 
 }
