@@ -16,6 +16,12 @@
 
 package de.klemp.middleware.component_1;
 
+
+/**
+ * This is a test class which is read by the GUI and can be selected within a selection box of the GUI.
+ * @author JanaKlemp
+ *
+ */
 public class Arduino {
     public void send()
     {

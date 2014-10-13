@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 /**
+ * This is a test class which is read by the GUI and can be selected within a selection box of the GUI.
+ * @author JanaKlemp
  *
  */
 package de.klemp.middleware.component_1;
