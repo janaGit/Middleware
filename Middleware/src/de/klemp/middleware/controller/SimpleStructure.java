@@ -21,7 +21,7 @@ package de.klemp.middleware.controller;
 public class SimpleStructure implements Structure {
     String[][] structure;
 
-    XY aktuell;
+    XY current;
 
     XY length;
 
@@ -36,20 +36,20 @@ public class SimpleStructure implements Structure {
                 structureArray[i][j] = cells[j];
             }
         }
-        this.aktuell = new XY(x, y);
+        this.current = new XY(x, y);
         this.length = new XY(rows.length, numberColums);
         this.structure = structureArray;
     }
 
-    public String rechts()
+    public String right()
     {
         String value = "";
-        if (aktuell.getY() + 1 < length.getY()) {
-            if (!structure[aktuell.getX()][aktuell.getY() + 1].equals("-")) {
-                aktuell.setY(aktuell.getY() + 1);
-                value = structure[aktuell.getX()][aktuell.getY()];
-                if (value.equals(structure[aktuell.getX()][aktuell.getY() - 1])) {
-                    value = rechts();
+        if (current.getY() + 1 < length.getY()) {
+            if (!structure[current.getX()][current.getY() + 1].equals("-")) {
+                current.setY(current.getY() + 1);
+                value = structure[current.getX()][current.getY()];
+                if (value.equals(structure[current.getX()][current.getY() - 1])) {
+                    value = right();
                 }
             }
         } else {
@@ -60,15 +60,15 @@ public class SimpleStructure implements Structure {
 
     }
 
-    public String links()
+    public String left()
     {
         String value = "";
-        if (aktuell.getY() - 1 >= 0) {
-            if (!structure[aktuell.getX()][aktuell.getY() - 1].equals("-")) {
-                aktuell.setY(aktuell.getY() - 1);
-                value = structure[aktuell.getX()][aktuell.getY()];
-                if (value.equals(structure[aktuell.getX()][aktuell.getY() + 1])) {
-                    value = links();
+        if (current.getY() - 1 >= 0) {
+            if (!structure[current.getX()][current.getY() - 1].equals("-")) {
+                current.setY(current.getY() - 1);
+                value = structure[current.getX()][current.getY()];
+                if (value.equals(structure[current.getX()][current.getY() + 1])) {
+                    value = left();
                 }
             }
         } else {
@@ -78,15 +78,15 @@ public class SimpleStructure implements Structure {
         return value;
     }
 
-    public String oben()
+    public String up()
     {
         String value = "";
-        if (aktuell.getX() - 1 >= 0) {
-            if (!structure[aktuell.getX() - 1][aktuell.getY()].equals("-")) {
-                aktuell.setX(aktuell.getX() - 1);
-                value = structure[aktuell.getX()][aktuell.getY()];
-                if (value.equals(structure[aktuell.getX() + 1][aktuell.getY()])) {
-                    value = oben();
+        if (current.getX() - 1 >= 0) {
+            if (!structure[current.getX() - 1][current.getY()].equals("-")) {
+                current.setX(current.getX() - 1);
+                value = structure[current.getX()][current.getY()];
+                if (value.equals(structure[current.getX() + 1][current.getY()])) {
+                    value = up();
                 }
             }
         } else {
@@ -96,15 +96,15 @@ public class SimpleStructure implements Structure {
         return value;
     }
 
-    public String unten()
+    public String down()
     {
         String value = "";
-        if (aktuell.getX() + 1 < length.getX()) {
-            if (!structure[aktuell.getX() + 1][aktuell.getY()].equals("-")) {
-                aktuell.setX(aktuell.getX() + 1);
-                value = structure[aktuell.getX()][aktuell.getY()];
-                if (value.equals(structure[aktuell.getX() - 1][aktuell.getY()])) {
-                    value = unten();
+        if (current.getX() + 1 < length.getX()) {
+            if (!structure[current.getX() + 1][current.getY()].equals("-")) {
+                current.setX(current.getX() + 1);
+                value = structure[current.getX()][current.getY()];
+                if (value.equals(structure[current.getX() - 1][current.getY()])) {
+                    value = down();
                 }
             }
         } else {
@@ -114,14 +114,14 @@ public class SimpleStructure implements Structure {
         return value;
     }
 
-    public String getActual()
+    public String getCurrent()
     {
-        return structure[aktuell.getX()][aktuell.getY()];
+        return structure[current.getX()][current.getY()];
     }
 
     public String getXY()
     {
-        return aktuell.getX() + "," + aktuell.getY();
+        return current.getX() + "," + current.getY();
     }
 
     class XY {

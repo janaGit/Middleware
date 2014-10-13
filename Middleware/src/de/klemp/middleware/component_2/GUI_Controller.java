@@ -28,12 +28,12 @@ import de.klemp.middleware.controller.Sensor;
 import de.klemp.middleware.controller.SimpleStructure;
 import de.klemp.middleware.controller.Structure;
 
-public class SteuerungsMenue {
+public class GUI_Controller {
     static String time = "";
 
     static long longtime;
 
-    public static void steuerung(String classes,
+    public static void control(String classes,
             String name,
             Structure structure,
             String topic)
@@ -41,25 +41,25 @@ public class SteuerungsMenue {
         String s = Controller.queryDatabase("select event from \"" + classes + "\"where nameInput='" + name + "';", true);
         String neu = "";
         if (s.equals("rechts")) {
-            neu = structure.rechts();
+            neu = structure.right();
         }
         if (s.equals("links")) {
-            neu = structure.links();
+            neu = structure.left();
         }
         if (s.equals("oben")) {
-            neu = structure.oben();
+            neu = structure.up();
         }
         if (s.equals("unten")) {
-            neu = structure.unten();
+            neu = structure.down();
         }
         if (s.equals("ok")) {
             neu = "click";
         }
         Controller.sendMessage(neu, topic);
-        System.out.println(neu + " " + topic + structure.getActual());
+        System.out.println(neu + " " + topic + structure.getCurrent());
     }
 
-    public static void steuerung2(String name,
+    public static void saveTimeInFile(String name,
             String topic)
     {
         // Controller.getValue("select action from \"Control\"where );

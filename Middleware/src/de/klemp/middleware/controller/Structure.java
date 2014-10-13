@@ -16,19 +16,18 @@
 
 package de.klemp.middleware.controller;
 
-import de.klemp.middleware.controller.SimpleStructure.XY;
 
 public interface Structure {
 
-    public abstract String rechts();
+    public abstract String right();
 
-    public abstract String links();
+    public abstract String left();
 
-    public abstract String oben();
+    public abstract String up();
 
-    public abstract String unten();
+    public abstract String down();
 
-    public abstract String getActual();
+    public abstract String getCurrent();
 
     public abstract String getXY();
 }

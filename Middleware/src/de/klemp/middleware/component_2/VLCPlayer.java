@@ -28,7 +28,7 @@ import org.apache.activemq.broker.BrokerService;
 
 import de.klemp.middleware.controller.Controller;
 
-public class PlayerVLC {
+public class VLCPlayer {
     public static void start(String name,
             String topic)
     {

@@ -17,12 +17,12 @@
 package de.klemp.middleware.component_1;
 
 public class Arduino {
-    public void sende()
+    public void send()
     {
 
     }
 
-    public void sende2()
+    public void send2()
     {
 
     }

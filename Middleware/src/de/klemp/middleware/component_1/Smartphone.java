@@ -40,7 +40,7 @@ public class Smartphone {
 
     @GET
     @Path("/rechtsKlick/{name}")
-    public static void rechtsKlick(@PathParam("name") String name)
+    public static void rightClick(@PathParam("name") String name)
     {
         name.replaceAll("\"", "\\\"");
         Controller.queryDatabase("update \"Smartphone\"set event='rechts' where nameInput='" + name + "';", false);
@@ -48,8 +48,8 @@ public class Smartphone {
     }
 
     @GET
-    @Path("/linksKlick/{name}")
-    public static void linksKlick(@PathParam("name") String name)
+    @Path("/leftClick/{name}")
+    public static void leftClick(@PathParam("name") String name)
     {
         name.replaceAll("\"", "\\\"");
         Controller.queryDatabase("update \"Smartphone\"set event='links' where nameInput='" + name + "';", false);
@@ -59,7 +59,7 @@ public class Smartphone {
 
     @GET
     @Path("/obenKlick/{name}")
-    public static void obenKlick(@PathParam("name") String name)
+    public static void upClick(@PathParam("name") String name)
     {
         name.replaceAll("\"", "\\\"");
         Controller.queryDatabase("update \"Smartphone\"set event='oben' where nameInput='" + name + "';", false);
@@ -69,7 +69,7 @@ public class Smartphone {
 
     @GET
     @Path("/untenKlick/{name}")
-    public static void untenKlick(@PathParam("name") String name)
+    public static void downClick(@PathParam("name") String name)
     {
         name.replaceAll("\"", "\\\"");
         Controller.queryDatabase("update \"Smartphone\"set event='unten' where nameInput='" + name + "';", false);
@@ -98,7 +98,7 @@ public class Smartphone {
 
     @GET
     @Path("/okKlick/{name}")
-    public static void okKlick(@PathParam("name") String name)
+    public static void okClick(@PathParam("name") String name)
     {
         name.replaceAll("\"", "\\\"");
         Controller.queryDatabase("update \"Smartphone\"set event='ok' where nameInput='" + name + "';", false);

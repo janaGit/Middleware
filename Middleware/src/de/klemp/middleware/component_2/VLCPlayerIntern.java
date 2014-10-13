@@ -20,7 +20,6 @@ package de.klemp.middleware.component_2;
 
 import java.io.IOException;
 
-import de.klemp.middleware.controller.Controller;
 import de.klemp.middleware.controller.VLCControl;
 
 public class VLCPlayerIntern {

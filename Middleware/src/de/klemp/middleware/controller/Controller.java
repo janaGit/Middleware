@@ -56,6 +56,7 @@ import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.command.ActiveMQDestination;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.security.MessageAuthorizationPolicy;
+import org.apache.log4j.Logger;
 
 import de.klemp.middleware.component_1.*;
 import de.klemp.middleware.component_2.*;
@@ -63,7 +64,7 @@ import de.klemp.middleware.component_2.*;
 @Path("/")
 public class Controller {
     static BrokerService broker;
-
+    private static Logger logger = Logger.getLogger( Controller.class );
     private static String component1 = "Schicht1";
 
     private static String component2 = "Schicht2";
@@ -324,7 +325,7 @@ public class Controller {
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/anmelden/{component}/{classes}/{name}")
-    public static synchronized String anmelden(@PathParam("component") int component,
+    public static synchronized String subscribe(@PathParam("component") int component,
             @PathParam("classes") String classes,
             @PathParam("name") String name)
     {
@@ -392,7 +393,7 @@ public class Controller {
      */
     @GET
     @Path("/abmelden/{component}/{classes}/{name}")
-    public static synchronized String abmelden(@PathParam("component") int component,
+    public static synchronized String unsubscribe(@PathParam("component") int component,
             @PathParam("classes") String classes,
             @PathParam("name") String name)
     {
