@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: de.klemp.middleware.controller.ControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 5, Errors: 0, Skipped: 0, Time elapsed: 2.169 sec <<< FAILURE!
+controllerToList(de.klemp.middleware.controller.ControllerTest)  Time elapsed: 0.016 sec  <<< FAILURE!
+java.lang.RuntimeException: Test not implemented
+	at de.klemp.middleware.controller.ControllerTest.controllerToList(ControllerTest.java:10)
+
+createDBConnection(de.klemp.middleware.controller.ControllerTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.RuntimeException: Test not implemented
+	at de.klemp.middleware.controller.ControllerTest.createDBConnection(ControllerTest.java:15)
+
+init(de.klemp.middleware.controller.ControllerTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.RuntimeException: Test not implemented
+	at de.klemp.middleware.controller.ControllerTest.init(ControllerTest.java:20)
+
+searchMethods(de.klemp.middleware.controller.ControllerTest)  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.RuntimeException: Test not implemented
+	at de.klemp.middleware.controller.ControllerTest.searchMethods(ControllerTest.java:25)
+
+start(de.klemp.middleware.controller.ControllerTest)  Time elapsed: 1.544 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at de.klemp.middleware.controller.Controller.controllerToList(Controller.java:1042)
+	at de.klemp.middleware.controller.Controller.start(Controller.java:515)
+	at de.klemp.middleware.controller.ControllerTest.start(ControllerTest.java:30)
+

@@ -1,1 +1,17 @@
+de\klemp\middleware\controller\Servlet.class
+de\klemp\middleware\controller\Structure.class
+de\klemp\middleware\component_2\VLCPlayer.class
+de\klemp\middleware\controller\VLCControl.class
+de\klemp\middleware\component_2\GUI_Controller.class
+de\klemp\middleware\controller\SimpleStructure$XY.class
 de\klemp\middleware\component_1\Smartphone.class
+de\klemp\middleware\controller\MethodToInvoke.class
+de\klemp\middleware\component_1\Arduino.class
+de\klemp\middleware\controller\SimpleStructure.class
+de\klemp\middleware\controller\Sensor.class
+de\klemp\middleware\component_1\Kinect.class
+de\klemp\middleware\controller\ControllerSchema.class
+de\klemp\middleware\controller\ControllerTest.class
+de\klemp\middleware\controller\Controller.class
+de\klemp\middleware\component_2\VLCPlayerIntern.class
+de\klemp\middleware\controller\VLCControl$1.class

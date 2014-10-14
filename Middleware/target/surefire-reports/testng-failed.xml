@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite verbose="0" name="Failed suite [de.klemp.middleware.controller.ControllerTest]">
+  <test name="Command line test(failed)">
+    <classes>
+      <class name="de.klemp.middleware.controller.ControllerTest">
+        <methods>
+          <include name="init"/>
+          <include name="searchMethods"/>
+          <include name="createDBConnection"/>
+          <include name="start"/>
+          <include name="controllerToList"/>
+        </methods>
+      </class> <!-- de.klemp.middleware.controller.ControllerTest -->
+    </classes>
+  </test> <!-- Command line test(failed) -->
+</suite> <!-- Failed suite [de.klemp.middleware.controller.ControllerTest] -->

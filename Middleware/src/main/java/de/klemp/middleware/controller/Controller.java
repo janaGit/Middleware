@@ -58,6 +58,7 @@ import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.security.MessageAuthorizationPolicy;
 import org.apache.commons.configuration.*;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import de.klemp.middleware.component_1.*;
 import de.klemp.middleware.component_2.*;
@@ -508,7 +509,7 @@ public class Controller {
     @GET
     @Path("/start")
     public static synchronized String start()
-    {
+    {PropertyConfigurator.configure("log4j.properties");
         String ok = "ok";
         isBrokerStarted();
         controllerToList();
