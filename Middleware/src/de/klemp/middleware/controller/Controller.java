@@ -56,6 +56,7 @@ import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.command.ActiveMQDestination;
 import org.apache.activemq.command.ActiveMQTopic;
 import org.apache.activemq.security.MessageAuthorizationPolicy;
+import org.apache.commons.configuration.*;
 import org.apache.log4j.Logger;
 
 import de.klemp.middleware.component_1.*;
@@ -64,14 +65,14 @@ import de.klemp.middleware.component_2.*;
 @Path("/")
 public class Controller {
     static BrokerService broker;
-    private static Logger logger = Logger.getLogger( Controller.class );
+
+    private static Logger logger = Logger.getLogger(Controller.class);
+
     private static String component1 = "Schicht1";
 
     private static String component2 = "Schicht2";
 
     private static java.sql.Connection conn;
-
-    private final static String urlDatabase = "jdbc:postgresql://localhost/Middleware";
 
     private static HashMap<String, Structure> structures = new HashMap<String, Structure>();
 
@@ -116,18 +117,14 @@ public class Controller {
                         parameterWithoutdata[0] = klasse;
                         parameterWithoutdata[1] = name;
                         parameterWithoutdata[2] = m.getTopic();
-                        try {
-                            m2.invoke(null, parameterWithoutdata);
-                        } catch (IllegalArgumentException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
+                       
+                            try {
+                                m2.invoke(null, parameterWithoutdata);
+                            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        
                     }
                     if (!data.equals("Sensor")) {
                         Object[] parameter = new Object[4];
@@ -137,19 +134,14 @@ public class Controller {
                         if (data2 != null) {
                             parameter[2] = data2;
                             parameter[3] = m.getTopic();
-                            try {
-                                m2.invoke(null, parameter);
-                            } catch (IllegalArgumentException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            } catch (IllegalAccessException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            } catch (InvocationTargetException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
-                            }
-
+                           
+                                try {
+                                    m2.invoke(null, parameter);
+                                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                                    // TODO Auto-generated catch block
+                                    e.printStackTrace();
+                                }
+                            
                         }
                     }
                 }
@@ -180,13 +172,7 @@ public class Controller {
                         parameter[2] = sensor;
                         try {
                             m2.invoke(null, parameter);
-                        } catch (IllegalArgumentException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
+                        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
@@ -976,21 +962,15 @@ public class Controller {
                 for (int i = 0; i < files.length; i++) {
                     String[] f = files[i].getName().split("\\.");
                     Class c;
-                    try {
-                        c = loader.loadClass(component + "." + f[0]);
+                    
                         try {
+                            c = loader.loadClass(component + "." + f[0]);
                             classes.add(c.newInstance());
-                        } catch (InstantiationException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IllegalAccessException e) {
+                        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-                    } catch (ClassNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                     
                 }
             }
         } catch (IOException e) {
@@ -1171,7 +1151,7 @@ public class Controller {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             String message = e.getMessage();
-            if (!message.contains("doppelter Schlï¿½sselwert")) {
+            if (!message.contains("doppelter Schlüsselwert")) {
                 e.printStackTrace();
             } else {
                 ok = "This method and topic has already a structure";
@@ -1214,28 +1194,25 @@ public class Controller {
      */
     private static synchronized void createDBConnection()
     {
+        
+            Configuration config;
+            try {
+                config = new PropertiesConfiguration("GUIconf.properties");
+                String databaseDriver = config.getString("databaseDriver");
+                Class.forName(databaseDriver);
 
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        try {
-            if (conn == null || conn.isClosed()) {
-                try {
+                if (conn == null || conn.isClosed()) {
+
+                    String urlDatabase = config.getString("urlDatabase");
                     conn = DriverManager.getConnection(urlDatabase, "middleware", "queryDatabase");
-                } catch (SQLException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
-
+            } catch (ConfigurationException | ClassNotFoundException | SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            
 
+         
     }
 
     /**
@@ -1258,24 +1235,33 @@ public class Controller {
 
     private static void isBrokerStarted()
     {
+        Configuration config;
         if (broker == null) { // Create an embedded broker
-            broker = new BrokerService();
 
             try {
-                broker.addConnector("tcp://localhost:61616");
-                broker.addConnector("ws://localhost:61614");
+                config = new PropertiesConfiguration("GUIconf.properties");
+                String tcpConnection = config.getString("tcpConnection");
+                String wsConnection = config.getString("wsConnection");
+
+                broker = new BrokerService();
+
+                broker.addConnector(tcpConnection);
+                broker.addConnector(wsConnection);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
+
         }
         if (!broker.isStarted()) {
+
             try {
                 broker.start();
             } catch (Exception e) {
-                // TODO Auto-generated catch block e.printStackTrace();
-
+                // TODO Auto-generated catch block
+                e.printStackTrace();
             }
+
         }
     }
 

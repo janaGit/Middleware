@@ -8,6 +8,7 @@ var id;
 var actual;
 var clicked=false;
 var XY;
+var addressMiddleware="http://localhost:8088/Middleware/Controller/"
 var structure="init,searchMethod,newRow,newRow,newRow,newRow,newRow,newRow,newRow,ok!";
 //http://stackoverflow.com/questions/6685249/jquery-performing-synchronous-ajax-requests
 $.ajaxSetup({async:false});
@@ -15,8 +16,8 @@ function controllerInit(){
 	 $.post("Servlet",{type:"init"});
 }
 function start(){
-    $.get("http://localhost:8088/Middleware/Controller/start");
-	$.get("http://localhost:8088/Middleware/Controller/anmelden/2/SteuerungsMenue/GUI");
+    $.get(addressMiddleware+"start");
+	$.get(addressMiddleware+"/anmelden/2/SteuerungsMenue/GUI");
 	 connectToBroker();
  }
 
@@ -81,7 +82,7 @@ function addNewRow(j){
 	for(var i=0;i<j;i++){
 		newRow();
 	}  rowsController=rowsController+j;
-	$.post("http://localhost:8088/Middleware/Controller/addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+structure+"/0/8");
+	$.post(addressMiddleware+"addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+structure+"/0/8");
 	$("#newRow").focus();
 	actual="newRow";
 	
@@ -97,7 +98,7 @@ function deleteRow(i){
 	  for(var n=0;n<splitedStructure.length;n++){
 		  structure=structure+splitedStructure[n];
 	  }
-	 $.post("http://localhost:8088/Middleware/Controller/addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+structure+"/0/8");
+	 $.post(addressMiddleware+"addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+structure+"/0/8");
 actual="newRow";
 $("#newRow").focus();
 $("#newRow").css({'background':'lightgrey'});	
@@ -371,7 +372,7 @@ sendStructure(select1,select2,select3,rowid,"Data","6");
 		    	  //document.getElementById("#0_5").focus();
 		      //http://api.jquery.com/jQuery.get/
 		      
-		      $.get("http://localhost:8088/Middleware/Controller/data/getXY/steuerMenue",
+		      $.get(addressMiddleware+"data/getXY/steuerMenue",
 		    	function(data){
 		    	  XY=data;
 		      }	  
@@ -386,7 +387,7 @@ sendStructure(select1,select2,select3,rowid,"Data","6");
 		    		var splitted=XY.split(",", 2);
 		    	clicked=false;
 		    	$("#"+actual).attr('size', 1);
-		    	$.post("http://localhost:8088/Middleware/Controller/addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+structure+"/"+splitted[0]+"/"+splitted[1]);
+		    	$.post("addressMiddleware+"addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+structure+"/"+splitted[0]+"/"+splitted[1]);
 		    }
 		    else{
 
@@ -403,7 +404,7 @@ sendStructure(select1,select2,select3,rowid,"Data","6");
 		    	}string=string+options[options.length-1].value;
 		    	//http://stackoverflow.com/questions/1221957/jquery-to-retrieve-and-set-selected-index-value-of-html-select-element
 		    	var size=$("#"+actual).prop("selectedIndex");
-		    	$.post("http://localhost:8088/Middleware/Controller/addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+string+"/+"+size+"/0");
+		    	$.post(addressMiddleware+"addSimpleStructure/SteuerungsMenue/steuerung/GUI/steuerMenue/"+string+"/+"+size+"/0");
 		    	//http://www.electrictoolbox.com/jquery-count-select-options/
 		    }
 		    	else{

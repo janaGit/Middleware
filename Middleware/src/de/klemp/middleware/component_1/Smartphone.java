@@ -29,7 +29,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 
 import de.klemp.middleware.controller.Controller;
 import de.klemp.middleware.controller.Sensor;
