@@ -121,8 +121,7 @@ public class Controller {
                             try {
                                 m2.invoke(null, parameterWithoutdata);
                             } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                                // TODO Auto-generated catch block
-                                e.printStackTrace();
+                                logger.error("Method could not be invoced", e);
                             }
                         
                     }
@@ -138,8 +137,8 @@ public class Controller {
                                 try {
                                     m2.invoke(null, parameter);
                                 } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
+                                  logger.error("Method of component2 could not be invoked", e);
+                                   
                                 }
                             
                         }
@@ -173,8 +172,8 @@ public class Controller {
                         try {
                             m2.invoke(null, parameter);
                         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            logger.error("Method could not be invoced", e);
+                            
                         }
 
                     }
@@ -217,8 +216,7 @@ public class Controller {
             session.close();
             connection.close();
         } catch (JMSException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Message could not be sended to activemq", e);
         }
 
     }
@@ -249,8 +247,7 @@ public class Controller {
             session.close();
             connection.close();
         } catch (JMSException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Message could not be sended to activemq", e);
         }
 
     }
@@ -283,8 +280,7 @@ public class Controller {
                 st.execute(query);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Database could not be queried", e);
         }
         closeDBConnection();
         return s;
@@ -355,10 +351,10 @@ public class Controller {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             String message = e.getMessage();
-            if (!message.contains("doppelter Schlï¿½sselwert")) {
-                e.printStackTrace();
+            if (!message.contains("doppelter Schlüsselwert")) {
+                logger.error("SQL Exception", e);
             }
 
         }
@@ -411,8 +407,7 @@ public class Controller {
 
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
 
         }
         closeDBConnection();
@@ -460,8 +455,7 @@ public class Controller {
                 deviceActive.put(classes + "," + name, isActive);
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception in Method isActive", e);
         }
         closeDBConnection();
         return ok;
@@ -526,10 +520,9 @@ public class Controller {
             st.execute();
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             String message = e.getMessage();
-            if (!message.contains("doppelter Schlï¿½sselwert")) {
-                e.printStackTrace();
+            if (!message.contains("doppelter Schlüsselwert")) {
+                logger.error("SQL Exception", e);
             }
         }
         closeDBConnection();
@@ -613,8 +606,8 @@ public class Controller {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
+         
         }
         closeDBConnection();
         return methods;
@@ -657,8 +650,7 @@ public class Controller {
                     }
                 }
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("SQL Exception in Method getNames", e);
 
             }
         } else {
@@ -713,8 +705,7 @@ public class Controller {
                 }
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
 
         }
         closeDBConnection();
@@ -739,8 +730,7 @@ public class Controller {
             size = r.getInt(1);
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
         }
         closeDBConnection();
 
@@ -779,8 +769,7 @@ public class Controller {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
         }
         closeDBConnection();
         return listController;
@@ -828,10 +817,10 @@ public class Controller {
                 stp.execute();
 
             } catch (SQLException e) {
-                // TODO Auto-generated catch block
+              
                 String message = e.getMessage();
                 if (!message.contains("doppelter Schlï¿½sselwert")) {
-                    e.printStackTrace();
+                    logger.error("SQL Exception", e);
                 }
             }
             closeDBConnection();
@@ -851,8 +840,7 @@ public class Controller {
             st = conn.createStatement();
             st.execute("delete from \"Controller\";");
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
         }
 
         closeDBConnection();
@@ -926,8 +914,7 @@ public class Controller {
 
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
         }
         closeDBConnection();
     }
@@ -967,15 +954,13 @@ public class Controller {
                             c = loader.loadClass(component + "." + f[0]);
                             classes.add(c.newInstance());
                         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            logger.error("Classes could not be refreshed", e);
                         }
                      
                 }
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception", e);
         }
         return classes;
 
@@ -1025,8 +1010,7 @@ public class Controller {
                             return methods[i];
 
                         } catch (IllegalArgumentException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
+                            logger.error("Method of the second component could not be returned" , e);
                         }
                     }
                 }
@@ -1072,8 +1056,7 @@ public class Controller {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception in controllerToList()", e);
         }
         closeDBConnection();
 
@@ -1093,8 +1076,7 @@ public class Controller {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception in ActiveDevicesToList", e);
         }
         closeDBConnection();
 
@@ -1149,7 +1131,7 @@ public class Controller {
             }
 
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            
             String message = e.getMessage();
             if (!message.contains("doppelter Schlüsselwert")) {
                 e.printStackTrace();
@@ -1180,8 +1162,7 @@ public class Controller {
                 stp.execute();
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("SQL Exception in deleteDevices()", e);
         }
         closeDBConnection();
         deviceActive.clear();
@@ -1207,8 +1188,7 @@ public class Controller {
                     conn = DriverManager.getConnection(urlDatabase, "middleware", "queryDatabase");
                 }
             } catch (ConfigurationException | ClassNotFoundException | SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("Could not create a database connection", e);
             }
             
 
@@ -1224,8 +1204,7 @@ public class Controller {
         try {
             conn.close();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("Database connection could not be closed", e);
         }
     }
 
@@ -1248,8 +1227,7 @@ public class Controller {
                 broker.addConnector(tcpConnection);
                 broker.addConnector(wsConnection);
             } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("A new message broker (activemq) could not be created ", e);
             }
 
         }
@@ -1258,8 +1236,7 @@ public class Controller {
             try {
                 broker.start();
             } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("Message broker could not be started", e);
             }
 
         }
@@ -1269,8 +1246,8 @@ public class Controller {
     {
         try {
             broker.stop();
-        } catch (Exception e) { // TODO Auto-generated catch block
-            e.printStackTrace();
+        } catch (Exception e) { 
+            logger.error("Message broker could not be started", e);
         }
     }
 

@@ -23,6 +23,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
 import de.klemp.middleware.controller.Controller;
 import de.klemp.middleware.controller.Sensor;
 import de.klemp.middleware.controller.SimpleStructure;
@@ -30,7 +32,7 @@ import de.klemp.middleware.controller.Structure;
 
 public class GUI_Controller {
     static String time = "";
-
+    private static Logger logger = Logger.getLogger(GUI_Controller.class);
     static long longtime;
 
     public static void control(String classes,
@@ -64,19 +66,17 @@ public class GUI_Controller {
     {
         // Controller.getValue("select action from \"Control\"where );
         System.out.println("Steuerung2 erreicht" + topic);
-        try {
-            FileOutputStream out = new FileOutputStream(new File("sensorenTime" + name + ".txt"));
+        
+            FileOutputStream out;
             try {
+                out = new FileOutputStream(new File("sensorenTime" + name + ".txt"));
                 out.write(time.getBytes(), 0, time.getBytes().length);
                 out.close();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+               logger.error("Time could not be stored in file",e);
             }
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+                
+           
     }
 
     // Controller.sendMessage("pause", topic);

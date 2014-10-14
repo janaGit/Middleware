@@ -20,11 +20,14 @@ package de.klemp.middleware.component_2;
 
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
+import de.klemp.middleware.controller.Controller;
 import de.klemp.middleware.controller.VLCControl;
 
 public class VLCPlayerIntern {
     private static VLCControl vlcPlayer;
-
+    private static Logger logger = Logger.getLogger(VLCPlayerIntern.class);
     private static void init()
     {
         if (vlcPlayer == null) {
@@ -32,8 +35,7 @@ public class VLCPlayerIntern {
             try {
                 vlcPlayer.connect();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                logger.error("Could not connect to VLCPLayer", e);
             }
         }
     }
@@ -41,63 +43,43 @@ public class VLCPlayerIntern {
     public static void start(String name,
             String topic)
     {
-        init();
-        try {
-            vlcPlayer.sendCommand("play");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        send();
     }
 
     public static void stop(String name,
             String topic)
     {
-        init();
-        try {
-            vlcPlayer.sendCommand("stop");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        send();
     }
 
     public static void pause(String name,
             String topic)
     {
-
-        init();
-        try {
-            vlcPlayer.sendCommand("pause");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        send();
+      
     }
 
     public static void slower(String name,
             String topic)
     {
-        init();
-        try {
-            vlcPlayer.sendCommand("slower");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        ;
+        send();
     }
 
     public static void faster(String name,
             String topic)
     {
-        init();
-        try {
-            vlcPlayer.sendCommand("faster");
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        send();
     }
-
+private static void send(){
+    init();
+    //http://www.java-forum.org/java-basics-anfaenger-themen/1191-methodennamen-laufzeit-ausgeben.html
+    Exception ex = new Exception();
+    StackTraceElement stackTop = ex.getStackTrace()[0];
+    String methodName = stackTop.getMethodName();
+    try {
+        vlcPlayer.sendCommand(methodName);
+    } catch (IOException e) {
+        logger.error("Command "+methodName+" could not be sended", e);
+    }
+}
 }
